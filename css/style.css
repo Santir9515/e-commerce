@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@1,500&family=Poppins:ital,wght@0,200;1,100&display=swap');
+
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box; 
+    font-family: 'Arimo', sans-serif;
+}
+
+.encabezadoPagina{
+    display: flex;
+    background: linear-gradient(#0aa7d6 80%, #000000);
+    padding-top: 2rem;
+    justify-content: center;
+}
+.tituloPrincipal{
+    color: #e2b215;
+    background-color: #000000;
+
+}
+.logoPrincipal{
+    height: 40px;
+}
+.sectionPrincipal{
+    background-color: #0aa7d6;
+}
+.primerParrafo{
+    font-size: 30px;
+    background-color: #000000;
+    color: #e2b215;
+}
+.formIngreso{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.formLabel{
+    font-size: 20px;
+    background-color: #000000;
+    color: #e2b215;
+}
+#marcaCelular{
+    background-color: #000000;
+    color: #0aa7d6;
+    width: auto;
+    height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+}
+#modeloCelular{
+    background-color: #000000;
+    color: #0aa7d6;
+    width: auto;
+    height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+}
+#anioCelular{
+    background-color: #000000;
+    color: #0aa7d6;
+    width: auto;
+    height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+}
+#precioCelular{
+    background-color: #000000;
+    color: #0aa7d6;
+    width: auto;
+    height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.Btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.productosEstilos{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    background: linear-gradient(#0aa7d6 80%, #000000);
+
+}
+.card{
+    width: 100%;
+    max-width: 380px;
+    margin: 1rem auto;
+    border: 1px solid #470c0c;
+    border-radius: 10%;
+    text-align: center;
+    background-color: #15a0b3;
+    max-height: 700px;
+}
+.card h3{
+    color: #e2b215;
+    margin: 0.5rem 0rem;
+    padding: 0.25rem;
+    padding-top: 1rem;
+    font-size: 2.25rem;
+    height: 120px;
+
+}
+.card img{
+    border: 1px solid black;
+    border-radius: 2%;
+    min-width: 250px;
+    width: 80%;
+    height: 300px;
+}
+.content{
+    padding: 1rem;
+    font-size: 1rem;
+
+}
+.content button{
+    padding: 0.5rem;
+    text-decoration: none;
+    color: rgb(24, 21, 21);
+    border: 1px black solid;
+    border-radius: 20%;
+    color: white;
+    background-color: black;
+
+    font-size: 1.25rem;
+
+}
+.content p{
+    padding: 0.25rem;
+}
+.content button:hover{
+    color:red;
+    height: 200%;
+    
+}
+.autorCard{
+    font-size: 2rem;
+    height: 80px;
+}
+.precioCard{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.aCarrito{
+    list-style-type: none;
+    color: #e2b215;
+}
