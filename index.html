@@ -17,7 +17,7 @@
             <img class= "logoPrincipal" src="./assets/Logo.png" alt="">
         </main>
         <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Catálogo de equipos</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,16 +27,16 @@
               <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Medios de contacto
+                    <a class="nav-link" href="#">Contacto
                     </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Nosotros</a>
                   </li>
                 </ul>
                 <ul className="navbar-nav me-auto">  
                   <li className="nav-item " >
-                      <a id="botonCarrito" data-bs-toggle="modal" data-bs-target="#idModal" class="btn btn-secondary"><i class="fas fa-shopping-cart fa-1x"></i></a>
+                      <a id="botonCarrito" data-bs-toggle="modal" data-bs-target="#idModal" class="btn btn-secondary">
+                        <i class="fas fa-shopping-cart fa-1x"></i>
+                        <img src="./assets/depositphotos_58300529-stock-illustration-check-out-icon-symbol.jpg" class="logoCarrito" alt="">
+                      </a>
                   </li>
               </ul>  
               </div>
@@ -67,7 +67,29 @@
             </div>
         </section>
         <div id="catalogo"></div>
-        
+        <div class="modal fade" id="idModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Carrito de Compras</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="modalBody">
+                
+              </div>
+              <div class="row ml-ato">
+                <p id="precioTotal"></p>
+              </div>
+              <div class="modal-footer">
+                
+                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" data-bs-dismiss="modal" class="btn btn-success" id="botonFinalizarCompra">Finalizar Compra</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <script src="./js/index.js"></script>
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">

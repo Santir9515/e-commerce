@@ -25,12 +25,25 @@ const celular6 = new Celulares (6, "TCL", "L7+ 64GB", 2020, 34.999, "assets/Celu
 let mostrador = []
 let equiposCarrito = []
 
+ let botonCarrito = document.getElementById("botonCarrito")
+ let modalBody = document.getElementById("modalBody")
+ let botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
+ let parrafoCompra = document.getElementById("precioTotal")
+ let acumulador
+ let divProductos = document.getElementById("productos")
+
 if(localStorage.getItem("mostrador")){
     mostrador = JSON.parse(localStorage.getItem("mostrador"))
     console.log(mostrador);
 }else{
     mostrador.push(celular1, celular2, celular3, celular4, celular5, celular6)
     localStorage.setItem("mostrador", JSON.stringify(mostrador))
+}
+
+if(localStorage.getItem("carrito")){
+    equiposCarrito = JSON.parse(localStorage.getItem("carrito"))
+}else{
+    localStorage.setItem("carrito", [])
 }
 
 
@@ -60,12 +73,26 @@ mostrador.forEach((celular)=> {
                                 <div class= "content"
                                     <p class="modeloCard">${celular.modelo}</p>
                                     <p class="precioCard">$ ${celular.precio}</p>
-                                    <a href="" target="blank" class= "aCarrito">Agregar al carrito</a>
+                                    <button id="aCarrito${celular.id}">Agregar al carrito</button>
                                 </div>
                             </article>`
     divCatalogo.appendChild(nuevoProducto)
-})
+
+    let aCarrito = document.getElementById(`aCarrito${celular.id}`)
+    console.log(aCarrito);
+
+    aCarrito.addEventListener("click", () => (agregarAlCarrito(celular)))
+
+        })
+    }
+
+function agregarAlCarrito (celular){
+        equiposCarrito.push(celular)
+        console.log(equiposCarrito);
+        localStorage.setItem("carrito", JSON.stringify(equiposCarrito))
+
 }
+    
 
 let mostrarCatalogoBtn = document.getElementById("verCatalogoBtn")
 mostrarCatalogoBtn.addEventListener("click", mostrarCatalogo)
@@ -77,3 +104,43 @@ function ocultarCatalogo (){
 let ocultarCatalogoBtn = document.getElementById("ocultarCatalogoBtn")
 ocultarCatalogoBtn.onclick = ocultarCatalogo
 
+
+ function inventarioCarrito (inventarioStorage){
+     modalBody.innerHTML = ""
+     inventarioStorage.forEach((aCarrito)=> {
+         modalBody.innerHTML += `
+         <div class="card border-primary mb-3" id ="productoCarrito${aCarrito.id}" style="max-width: 540px;">
+         <img class="card-img-top" src="${aCarrito.imagen}" alt="${aCarrito.marca}">
+         <div class="card-body">
+                <h4 class="card-title">${aCarrito.modelo}</h4>
+            
+                 <p class="card-text">$${aCarrito.precio}</p> 
+                <button class= "btn btn-danger" id="botonEliminar"><i class="fas fa-trash-alt"></i></button>
+         </div>    
+    
+    
+     </div>`
+     })
+    
+
+     valorTotalCompra(inventarioStorage)
+ }
+
+//BotonCarrito
+
+botonCarrito.addEventListener(`click`, () =>{
+    inventarioCarrito(equiposCarrito)
+})
+
+
+function valorTotalCompra(totalCompra){
+    acumulador = 0
+    totalCompra.forEach((aCarrito)=> {
+        acumulador += aCarrito.precio
+    })
+    if(acumulador == 0){
+        parrafoCompra.innerHTML = "<p> No agrego ningún producto al carrito</p>"
+    }else{
+        parrafoCompra.innerHTML = `Usted esta por pagar $ ${acumulador}`
+    }
+}
