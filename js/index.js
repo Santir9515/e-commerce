@@ -77,11 +77,3 @@ function ocultarCatalogo (){
 let ocultarCatalogoBtn = document.getElementById("ocultarCatalogoBtn")
 ocultarCatalogoBtn.onclick = ocultarCatalogo
 
-
-
-let botonCarrito = document.getElementById("botonCarrito")
-let modalBody = document.getElementById("modal-body")
-let botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
-let parrafoCompra = document.getElementById('precioTotal')
-let acumulador
-let divProductos = document.getElementById("productos")
