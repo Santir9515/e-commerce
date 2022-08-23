@@ -21,11 +21,15 @@ const celular4 = new Celulares (4, "Samsung", "A31 64GB", 2020, 37.999, "assets/
 const celular5 = new Celulares (5, "TCL","20SE 256GB", 2021, 58.999, "assets/Celular5.jpg")
 
 const celular6 = new Celulares (6, "TCL", "L7+ 64GB", 2020, 34.999, "assets/Celular6.jpg")
-//Desestructuracion
+
+
+
 
 
 let mostrador = []
+
 let equiposCarrito = JSON.parse(localStorage.getItem("carrito")) || []
+
 
  let botonCarrito = document.getElementById("botonCarrito")
  let modalBody = document.getElementById("modalBody")
@@ -33,6 +37,7 @@ let equiposCarrito = JSON.parse(localStorage.getItem("carrito")) || []
  let parrafoCompra = document.getElementById("precioTotal")
  let acumulador
  let divProductos = document.getElementById("productos")
+
 
 if(localStorage.getItem("mostrador")){
     mostrador = JSON.parse(localStorage.getItem("mostrador"))
@@ -119,7 +124,7 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
      })
     
 
-     valorTotalCompra(inventarioStorage)
+     valorTotalCompra(...inventarioStorage)
  }
 
 //BotonCarrito
@@ -129,16 +134,31 @@ botonCarrito.addEventListener(`click`, () =>{
 })
 
 
-function valorTotalCompra(totalCompra){
+function valorTotalCompra(...totalCompra){
     acumulador = 0
-    totalCompra.forEach((aCarrito)=> {
-        acumulador += aCarrito.precio
-    })
-      if(acumulador == 0){
-          parrafoCompra.innerHTML = "<p> No agrego ningún producto al carrito</p>"
-      }else{
-          parrafoCompra.innerHTML = `Usted esta por pagar $ ${acumulador}`
-    }
+    acumulador = totalCompra.reduce((acumulador, aCarrito) => {
+        return acumulador + aCarrito.precio
+    },0)
+
+    //Ternario
+
+    acumulador > 0 ? parrafoCompra.innerHTML = `Usted esta por pagar $ ${acumulador}` : parrafoCompra.innerHTML = "<p> No agrego ningún producto al carrito</p>" 
+    
+    
 }
 
+//DesestructuracionAlias
 
+let [a, c, b, d, e, f] = mostrador
+a = "Motorola"
+b = "Motorola"
+c = "Samsung"
+d = "Samsung"
+e = "TCL"
+f = "TCL"
+console.log(a);
+console.log(b);
+console.log(c);
+console.log(d);
+console.log(e);
+console.log(f);
