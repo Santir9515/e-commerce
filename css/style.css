@@ -95,7 +95,7 @@
     max-height: 700px;
 }
 .card h3{
-    color: #0aa7d6;
+    color: #121213;
     margin: 0.5rem 0rem;
     padding: 0.25rem;
     padding-top: 1rem;
@@ -107,7 +107,7 @@
     border: 1px solid black;
     border-radius: 2%;
     min-width: 250px;
-    width: 80%;
+    width: 100%;
     height: 300px;
 }
 .content{
@@ -117,12 +117,10 @@
 }
 .content button{
     padding: 0.5rem;
-    text-decoration: none;
-    color: #0aa7d6;
+    /* text-decoration: none; */
     border: 1px black solid;
     border-radius: 20%;
     background-color: black;
-
     font-size: 1.25rem;
 
 }
@@ -146,7 +144,6 @@
 
 .aCarrito{
     list-style-type: none;
-    color: #0aa7d6;
 }
 
 .logoCarrito{
@@ -158,4 +155,16 @@
     color: #0aa7d6;
     display: flex;
     justify-content: center;
+}
+
+.modeloNuevo{
+ color: #0aa7d6;
+ font-size: 50px;
+ text-decoration: none;
+}
+
+.modeloViejo{
+color: #686464;
+font-weight: bold;
+text-decoration: line-through;
 }

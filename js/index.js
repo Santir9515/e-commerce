@@ -21,9 +21,11 @@ const celular4 = new Celulares (4, "Samsung", "A31 64GB", 2020, 37.999, "assets/
 const celular5 = new Celulares (5, "TCL","20SE 256GB", 2021, 58.999, "assets/Celular5.jpg")
 
 const celular6 = new Celulares (6, "TCL", "L7+ 64GB", 2020, 34.999, "assets/Celular6.jpg")
+//Desestructuracion
+
 
 let mostrador = []
-let equiposCarrito = []
+let equiposCarrito = JSON.parse(localStorage.getItem("carrito")) || []
 
  let botonCarrito = document.getElementById("botonCarrito")
  let modalBody = document.getElementById("modalBody")
@@ -38,12 +40,6 @@ if(localStorage.getItem("mostrador")){
 }else{
     mostrador.push(celular1, celular2, celular3, celular4, celular5, celular6)
     localStorage.setItem("mostrador", JSON.stringify(mostrador))
-}
-
-if(localStorage.getItem("carrito")){
-    equiposCarrito = JSON.parse(localStorage.getItem("carrito"))
-}else{
-    localStorage.setItem("carrito", [])
 }
 
 
@@ -66,14 +62,15 @@ divCatalogo.setAttribute("class", "productosEstilos")
 
 function mostrarCatalogo(){
 mostrador.forEach((celular)=> {
+
     let nuevoProducto = document.createElement("div")
-    nuevoProducto.innerHTML = `<article id="${celular.id}" class= "card">
+    nuevoProducto.innerHTML = `<article id="${celular.id}" class= "card ">
                                 <h3 class= "marcaCard">${celular.marca}</h3>
                                 <img src="${celular.imagen}" alt="${celular.marca} ${celular.modelo} class= "imgCard"">
                                 <div class= "content"
-                                    <p class="modeloCard">${celular.modelo}</p>
+                                    <p class= "modeloCard">${celular.modelo} (${celular.año})</p>
                                     <p class="precioCard">$ ${celular.precio}</p>
-                                    <button id="aCarrito${celular.id}">Agregar al carrito</button>
+                                    <button class = "${celular.año <= 2020 ? "modeloViejo" : "modeloNuevo"}" id="aCarrito${celular.id}">Agregar al carrito</button>
                                 </div>
                             </article>`
     divCatalogo.appendChild(nuevoProducto)
@@ -112,9 +109,8 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
          <div class="card border-primary mb-3" id ="productoCarrito${aCarrito.id}" style="max-width: 540px;">
          <img class="card-img-top" src="${aCarrito.imagen}" alt="${aCarrito.marca}">
          <div class="card-body">
-                <h4 class="card-title">${aCarrito.modelo}</h4>
-            
-                 <p class="card-text">$${aCarrito.precio}</p> 
+                <h4 class="card-title>${aCarrito.modelo}</h4>
+                 <p class="card-text">$${aCarrito.precio}</p>
                 <button class= "btn btn-danger" id="botonEliminar"><i class="fas fa-trash-alt"></i></button>
          </div>    
     
@@ -138,9 +134,11 @@ function valorTotalCompra(totalCompra){
     totalCompra.forEach((aCarrito)=> {
         acumulador += aCarrito.precio
     })
-    if(acumulador == 0){
-        parrafoCompra.innerHTML = "<p> No agrego ningún producto al carrito</p>"
-    }else{
-        parrafoCompra.innerHTML = `Usted esta por pagar $ ${acumulador}`
+      if(acumulador == 0){
+          parrafoCompra.innerHTML = "<p> No agrego ningún producto al carrito</p>"
+      }else{
+          parrafoCompra.innerHTML = `Usted esta por pagar $ ${acumulador}`
     }
 }
+
+
