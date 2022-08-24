@@ -168,3 +168,12 @@ color: #686464;
 font-weight: bold;
 text-decoration: line-through;
 }
+
+.logoRemover{
+    height: 10px;
+    width: 10px;
+}
+.botonCarrito{
+    height: 1px;
+    width: 1px;
+}

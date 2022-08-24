@@ -116,8 +116,12 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
          <div class="card-body">
                 <h4 class="card-title>${aCarrito.modelo}</h4>
                  <p class="card-text">$${aCarrito.precio}</p>
-                <button class= "btn btn-danger" id="botonEliminar"><i class="fas fa-trash-alt"></i></button>
-         </div>    
+         </div>
+         <div class= "botonCarrito"> 
+                <button class= "btn btn-danger botonRemover" id="botonEliminar">
+                <img src="./assets/logoRemover.png" alt="logoRemover" class="logoRemover"></button>
+         </div>
+            
     
     
      </div>`
