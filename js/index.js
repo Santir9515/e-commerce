@@ -80,6 +80,19 @@ mostrador.forEach((celular)=> {
                             </article>`
     divCatalogo.appendChild(nuevoProducto)
 
+    // let catalogoDesplegado = mostrador.indexOf(celular)
+    // if(catalogoDesplegado += 2){
+    //     mostrarCatalogo()
+    // }else{
+    //     Swal.fire({
+    //         title: "Error",
+    //         text: "Catálogo Desplegado",
+    //         icon: "error",
+    //         confirmButtonText: "Ok, Entendido",
+    //     })
+
+    // }
+
     let aCarrito = document.getElementById(`aCarrito${celular.id}`)
     console.log(aCarrito);
 
@@ -89,9 +102,24 @@ mostrador.forEach((celular)=> {
     }
 
 function agregarAlCarrito (celular){
-        equiposCarrito.push(celular)
-        console.log(equiposCarrito);
+    let celularAgregado = equiposCarrito.indexOf(celular)
+    if(celularAgregado == -1){
+        equiposCarrito.push(celular);
         localStorage.setItem("carrito", JSON.stringify(equiposCarrito))
+        Swal.fire({
+            title: "Listo",
+            text: `El celular ${celular.marca} ${celular.modelo} ya esta cargado en su carrito`,
+            icon: "success",
+            timer: 2000
+        })
+    }else{
+        Swal.fire({
+            title: "Aguarde",
+            text: `Solo se puede agregar un equipo por transacción y el equipo ${celular.marca} ${celular.modelo} ya fue ingresado al carrito`,
+            icon: "info",
+            confirmButtonText: "OK, Se me chispoteó"
+        })   
+    }
 
 }
     
@@ -115,18 +143,34 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
          <img class="card-img-top" src="${aCarrito.imagen}" alt="${aCarrito.marca}">
          <div class="card-body">
                 <h4 class="card-title>${aCarrito.modelo}</h4>
-                 <p class="card-text">$${aCarrito.precio}</p>
+                 <p class="card-text">$${aCarrito.precio}</p> 
+                <button class= "btn btn-danger" id="botonRemover${aCarrito.id}">
+                </button>
          </div>
-         <div class= "botonCarrito"> 
-                <button class= "btn btn-danger botonRemover" id="botonEliminar">
-                <img src="./assets/logoRemover.png" alt="logoRemover" class="logoRemover"></button>
-         </div>
-            
-    
-    
      </div>`
      })
     
+     //Eliminar producto del carrito
+     inventarioStorage.forEach((aCarrito, indice) =>{
+        
+        document.getElementById(`botonRemover${aCarrito.id}`).addEventListener('click', () => {
+            Toastify({
+                text: `El equipo ${aCarrito.marca} ${aCarrito.modelo} fue eliminado de su carrito`,
+                duration: 2000,
+                
+              }).showToast();
+            let cardCarrito = document.getElementById(`aCarrito${aCarrito.id}`)
+            cardCarrito.remove()
+            
+            equiposCarrito.splice(indice, 1)
+            localStorage.setItem("carrito", JSON.stringify(equiposCarrito))
+            inventarioCarrito(equiposCarrito)
+        })
+
+     })
+
+
+     
 
      valorTotalCompra(...inventarioStorage)
  }
