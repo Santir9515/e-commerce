@@ -66,7 +66,17 @@ let divCatalogo = document.getElementById("catalogo")
 divCatalogo.setAttribute("class", "productosEstilos")
 
 function mostrarCatalogo(){
+divCatalogo.innerHTML=""
+Toastify({
+    text: `Catálogo Desplegado`,
+    duration: 2000,
+    gravity: "bottom",
+    style: {
+        background: "linear-gradient(to right, #0aa7d6, #000000)",
+      }
+  }).showToast();
 mostrador.forEach((celular)=> {
+
 
     let nuevoProducto = document.createElement("div")
     nuevoProducto.innerHTML = `<article id="${celular.id}" class= "card ">
@@ -80,18 +90,9 @@ mostrador.forEach((celular)=> {
                             </article>`
     divCatalogo.appendChild(nuevoProducto)
 
-    // let catalogoDesplegado = mostrador.indexOf(celular)
-    // if(catalogoDesplegado += 2){
-    //     mostrarCatalogo()
-    // }else{
-    //     Swal.fire({
-    //         title: "Error",
-    //         text: "Catálogo Desplegado",
-    //         icon: "error",
-    //         confirmButtonText: "Ok, Entendido",
-    //     })
+    
 
-    // }
+
 
     let aCarrito = document.getElementById(`aCarrito${celular.id}`)
     console.log(aCarrito);
@@ -99,27 +100,40 @@ mostrador.forEach((celular)=> {
     aCarrito.addEventListener("click", () => (agregarAlCarrito(celular)))
 
         })
+    
+    
     }
 
 function agregarAlCarrito (celular){
     let celularAgregado = equiposCarrito.indexOf(celular)
-    if(celularAgregado == -1){
-        equiposCarrito.push(celular);
-        localStorage.setItem("carrito", JSON.stringify(equiposCarrito))
+    if(celular.año < 2021){
         Swal.fire({
-            title: "Listo",
-            text: `El celular ${celular.marca} ${celular.modelo} ya esta cargado en su carrito`,
-            icon: "success",
+            title: "Error",
+            text: `El celular ${celular.marca} ${celular.modelo} no puede ser agregado ya que no hay stock del mismo`,
+            icon: "error",
             timer: 2000
+
         })
     }else{
-        Swal.fire({
-            title: "Aguarde",
-            text: `Solo se puede agregar un equipo por transacción y el equipo ${celular.marca} ${celular.modelo} ya fue ingresado al carrito`,
-            icon: "info",
-            confirmButtonText: "OK, Se me chispoteó"
-        })   
+        if(celularAgregado == -1){
+            equiposCarrito.push(celular);
+            localStorage.setItem("carrito", JSON.stringify(equiposCarrito))
+            Swal.fire({
+                title: "Listo",
+                text: `El celular ${celular.marca} ${celular.modelo} ya esta cargado en su carrito`,
+                icon: "success",
+                timer: 2000
+            })
+        }else{
+            Swal.fire({
+                title: "Aguarde",
+                text: `Solo se puede agregar un equipo por transacción y el equipo ${celular.marca} ${celular.modelo} ya fue ingresado al carrito`,
+                icon: "info",
+                confirmButtonText: "OK, Se me chispoteó"
+            })   
+        }
     }
+
 
 }
     
@@ -157,6 +171,9 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
             Toastify({
                 text: `El equipo ${aCarrito.marca} ${aCarrito.modelo} fue eliminado de su carrito`,
                 duration: 2000,
+                style: {
+                    background: "linear-gradient(to right, #0aa7d6, #000000)",
+                  }
                 
               }).showToast();
             let cardCarrito = document.getElementById(`aCarrito${aCarrito.id}`)
