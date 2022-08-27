@@ -1,3 +1,21 @@
+$(document).ready(function(){
+    $("body").vegas({
+        delay: 6500,
+        slides: [
+            { src: "./assets/fondoVega1.jpg" },
+            { src: "./assets/fondoVega3.jpg" },
+         ],
+
+         overlay: "overlays/02.png",
+         animation: "kenburnsUpLeft",
+
+    })
+})
+
+
+
+
+
 class Celulares {
     constructor (id, marca, modelo, año, precio, imagen){
         this.id = id
@@ -158,7 +176,7 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
          <div class="card-body">
                 <h4 class="card-title>${aCarrito.modelo}</h4>
                  <p class="card-text">$${aCarrito.precio}</p> 
-                <button class= "btn btn-danger" id="botonRemover${aCarrito.id}">
+                <button class= "btn btn-danger" id="botonRemover${aCarrito.id}"> Borrar Artículo
                 </button>
          </div>
      </div>`
