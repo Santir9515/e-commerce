@@ -83,6 +83,7 @@ guardarCelularBtn.addEventListener("click", nuevoCelular)
 let divCatalogo = document.getElementById("catalogo")
 divCatalogo.setAttribute("class", "productosEstilos")
 
+
 function mostrarCatalogo(){
 divCatalogo.innerHTML=""
 Toastify({
@@ -161,6 +162,14 @@ mostrarCatalogoBtn.addEventListener("click", mostrarCatalogo)
 
 function ocultarCatalogo (){
     divCatalogo.innerHTML = ""
+    Toastify({
+        text: `Catálogo oculto`,
+        duration: 2000,
+        gravity: "bottom",
+        style: {
+            background: "linear-gradient(to right, #0aa7d6, #000000)",
+          }
+      }).showToast();
 }
 
 let ocultarCatalogoBtn = document.getElementById("ocultarCatalogoBtn")
@@ -245,3 +254,5 @@ console.log(c);
 console.log(d);
 console.log(e);
 console.log(f);
+
+
