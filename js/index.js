@@ -55,6 +55,7 @@ let equiposCarrito = JSON.parse(localStorage.getItem("carrito")) || []
  let parrafoCompra = document.getElementById("precioTotal")
  let acumulador
  let divProductos = document.getElementById("productos")
+ 
 
 
 if(localStorage.getItem("mostrador")){
@@ -82,10 +83,14 @@ guardarCelularBtn.addEventListener("click", nuevoCelular)
 
 let divCatalogo = document.getElementById("catalogo")
 divCatalogo.setAttribute("class", "productosEstilos")
+const loaderCatalogo = document.getElementById("loader1")
+loaderCatalogo.addEventListener("click", mostrarCatalogo)
 
 
 function mostrarCatalogo(){
-divCatalogo.innerHTML=""
+    
+    divCatalogo.innerHTML="";
+
 Toastify({
     text: `Catálogo Desplegado`,
     duration: 2000,
@@ -130,7 +135,8 @@ function agregarAlCarrito (celular){
             title: "Error",
             text: `El celular ${celular.marca} ${celular.modelo} no puede ser agregado ya que no hay stock del mismo`,
             icon: "error",
-            timer: 2000
+            timer: 2000,
+            confirmButtonText: "Ufaaaaaa"
 
         })
     }else{
@@ -158,7 +164,20 @@ function agregarAlCarrito (celular){
     
 
 let mostrarCatalogoBtn = document.getElementById("verCatalogoBtn")
-mostrarCatalogoBtn.addEventListener("click", mostrarCatalogo)
+mostrarCatalogoBtn.addEventListener("click", ()=>{
+    //Loader
+
+loaderCatalogo.setAttribute("style", "display: block;")
+loaderCatalogo.innerHTML = `<div class="d-flex justify-content-center align-content-center">
+    <strong> Aguarde mientras se carga nuestro catálogo...</strong>
+    <div class="spinner-border m-5 text-light" style= "widht: 3rem; height: 3rem;"</div>
+    </div>`;
+setTimeout(()=>{
+    loaderCatalogo.remove()
+    mostrarCatalogo()
+},2000)
+})
+
 
 function ocultarCatalogo (){
     divCatalogo.innerHTML = ""

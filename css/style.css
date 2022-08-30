@@ -206,3 +206,7 @@ text-decoration: line-through;
     padding-right: 1rem;
     font-size: 18px;
 }
+#loader1{
+    font-size: 40px;
+    color: #470c0c;
+}
