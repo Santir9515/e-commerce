@@ -210,3 +210,10 @@ text-decoration: line-through;
     font-size: 40px;
     color: #470c0c;
 }
+
+.fechaLocal{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+}

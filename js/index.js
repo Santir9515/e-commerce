@@ -1,3 +1,5 @@
+//const { default: swal } = require("sweetalert");
+
 $(document).ready(function(){
     $("body").vegas({
         delay: 6500,
@@ -55,6 +57,9 @@ let equiposCarrito = JSON.parse(localStorage.getItem("carrito")) || []
  let parrafoCompra = document.getElementById("precioTotal")
  let acumulador
  let divProductos = document.getElementById("productos")
+
+
+
  
 
 
@@ -65,6 +70,8 @@ if(localStorage.getItem("mostrador")){
     mostrador.push(celular1, celular2, celular3, celular4, celular5, celular6)
     localStorage.setItem("mostrador", JSON.stringify(mostrador))
 }
+
+
 
 
 
@@ -165,7 +172,8 @@ function agregarAlCarrito (celular){
 
 let mostrarCatalogoBtn = document.getElementById("verCatalogoBtn")
 mostrarCatalogoBtn.addEventListener("click", ()=>{
-    //Loader
+  
+//Loader
 
 loaderCatalogo.setAttribute("style", "display: block;")
 loaderCatalogo.innerHTML = `<div class="d-flex justify-content-center align-content-center">
@@ -258,6 +266,42 @@ function valorTotalCompra(...totalCompra){
     
 }
 
+function finalizarCompra(){
+    swal.fire({
+        title: "Importante",
+        text: `Esta seguro que quiere comprar este equipo`,
+        icon: "info",
+        confirmButtonText: "Si, crack",
+        cancelButtonText: "No, le erré",
+        confirmButtonColor: 'green',
+        cancelButtonColor:'red',
+    }).then((result)=>{
+        let DateTime = luxon.DateTime
+        const diaLocal = DateTime.now()
+        let fecha =`Usted ha confirmado la compra de ${aCarrito.marca} ${aCarrito.modelo} el ${diaLocal.toLocaleString(DateTime.DATETIME_FULL)}`;
+        if (result.isConfirmed){
+            swal.fire({
+                title: 'Todo listo crack',
+                icon: 'succes',
+                confirmButtonColor: '#0aa7d6',
+                text: `Confirmaste la compra del equipo de tus sueños, el gran ${aCarrito.marca} ${aCarrito.modelo} a $ ${aCarrito.precio}`,
+                footer: `<p> Dentro de las próximas 48hrs hábiles tu envio será entregado. Recuerda estar atento a la puerta</p>`
+            })
+        aCarrito = []
+        localStorage.removeItem('carrito')
+        inventarioCarrito(aCarrito)
+        }else{
+            swal.fire({
+                title: 'Se canceló tu compra',
+                icon: 'error',
+                text: 'La compra no fue realizada, pero recuerde de vaciar el carrito',
+                timer: 4000
+            })
+        }
+    })
+}
+
+
 //DesestructuracionAlias
 
 let [a, c, b, d, e, f] = mostrador
@@ -275,3 +319,9 @@ console.log(e);
 console.log(f);
 
 
+ // Fecha con Luxon
+let DateTime = luxon.DateTime
+const diaLocal = DateTime.now()
+let fecha = (diaLocal.toLocaleString(DateTime.DATE_FULL))
+let mostrarFecha = document.getElementById("fechaLocal")
+mostrarFecha.innerHTML = `<p class= "fechaLocal">Hoy es ${fecha} y nos encanta verte en nuestra Tienda</p>`
