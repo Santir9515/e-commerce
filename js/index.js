@@ -246,11 +246,6 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
      valorTotalCompra(...inventarioStorage)
  }
 
-//BotonCarrito
-
-botonCarrito.addEventListener(`click`, () =>{
-    inventarioCarrito(equiposCarrito)
-})
 
 
 function valorTotalCompra(...totalCompra){
@@ -271,23 +266,25 @@ function finalizarCompra(){
         title: "Importante",
         text: `Esta seguro que quiere comprar este equipo`,
         icon: "info",
+        showCancelButton: true,
         confirmButtonText: "Si, crack",
         cancelButtonText: "No, le erré",
-        confirmButtonColor: 'green',
+        confirmButtonColor: '#0aa7d6',
         cancelButtonColor:'red',
-    }).then((result)=>{
+    }).then((result) => {
         let DateTime = luxon.DateTime
         const diaLocal = DateTime.now()
-        let fecha =`Usted ha confirmado la compra de ${aCarrito.marca} ${aCarrito.modelo} el ${diaLocal.toLocaleString(DateTime.DATETIME_FULL)}`;
+        let fecha = `Usted ha confirmado la compra del equipo el ${diaLocal.toLocaleString(DateTime.DATETIME_FULL)}`;
+        console.log(fecha);
         if (result.isConfirmed){
             swal.fire({
                 title: 'Todo listo crack',
-                icon: 'succes',
+                icon: 'success',
                 confirmButtonColor: '#0aa7d6',
-                text: `Confirmaste la compra del equipo de tus sueños, el gran ${aCarrito.marca} ${aCarrito.modelo} a $ ${aCarrito.precio}`,
+                text: `Confirmaste la compra del equipo de tus sueños.`,
                 footer: `<p> Dentro de las próximas 48hrs hábiles tu envio será entregado. Recuerda estar atento a la puerta</p>`
             })
-        aCarrito = []
+        mostrador = []
         localStorage.removeItem('carrito')
         inventarioCarrito(aCarrito)
         }else{
@@ -319,9 +316,19 @@ console.log(e);
 console.log(f);
 
 
- // Fecha con Luxon
-let DateTime = luxon.DateTime
-const diaLocal = DateTime.now()
-let fecha = (diaLocal.toLocaleString(DateTime.DATE_FULL))
-let mostrarFecha = document.getElementById("fechaLocal")
-mostrarFecha.innerHTML = `<p class= "fechaLocal">Hoy es ${fecha} y nos encanta verte en nuestra Tienda</p>`
+  //Fecha con Luxon
+ let DateTime = luxon.DateTime
+ const diaLocal = DateTime.now()
+ let fechaLocal = (diaLocal.toLocaleString(DateTime.DATE_FULL))
+ let mostrarFecha = document.getElementById("fechaLocal")
+ mostrarFecha.innerHTML = `<p class= "fechaLocal">Hoy es ${fechaLocal} y nos encanta verte en nuestra Tienda</p>`
+
+//BotonCarrito
+
+botonCarrito.addEventListener(`click`, () =>{
+    inventarioCarrito(equiposCarrito)
+})
+
+botonFinalizarCompra.addEventListener('click', ()=>{
+    finalizarCompra()
+})
