@@ -22,13 +22,15 @@ class Celulares {
 
 let mostrador = [];
 
-fetch("../Celulares.json")
+fetch("./Celulares.json")
 .then(response => response.json())
 .then(data => {
     console.log(data);
-    for (let celular of data) {
-        let celularNuevo = new Celulares(celular.id, celular.marca, celular.modelo, celular.precio, celular.imagen)
-        mostrador.push(celularNuevo)
+    data.forEach ((celular) => {
+        let mostradorFetch = new Celulares(celular.id, celular.marca, celular.modelo, celular.precio, celular.imagen)
+        mostrador.push(mostradorFetch)
+        console.log(mostradorFetch);
+
     }
     
-})
+)})
