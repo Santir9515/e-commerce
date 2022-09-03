@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "marca": "Motorola",
+        "modelo": "G52 128GB",
+        "año": 2022,
+        "precio": 51999,
+        "imagen": "./assets/Celular1.jpg"
+
+    },
+    {
+        "id": 2,
+        "marca": "Samsung",
+        "modelo": "S20 128GB",
+        "año": 2022,
+        "precio": 115599,
+        "imagen": "./assets/Celular2.jpg"
+
+    },
+    {
+        "id": 3,
+        "marca": "Motorola",
+        "modelo": "G42 64GB",
+        "año": 2021,
+        "precio": 47999,
+        "imagen": "./assets/celular3.jpg"
+
+    },
+    {
+        "id": 4,
+        "marca": "Samsung",
+        "modelo": "A31 64GB",
+        "año": 2020,
+        "precio": 37999,
+        "imagen": "./assets/Celular4.jpg"
+
+    },
+    {
+        "id": 5,
+        "marca": "TCL",
+        "modelo": "20SE 256GB",
+        "año": 2021,
+        "precio": 58999,
+        "imagen": "./assets/Celular5.jpg"
+
+    },
+    {
+        "id": 6,
+        "marca": "TCL",
+        "modelo": "L7+ 64GB",
+        "año": 2020,
+        "precio": 34999,
+        "imagen": "./assets/Celular6.jpg"
+
+    }
+]

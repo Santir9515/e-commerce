@@ -1,4 +1,4 @@
-//const { default: swal } = require("sweetalert");
+
 
 $(document).ready(function(){
     $("body").vegas({
@@ -16,38 +16,6 @@ $(document).ready(function(){
 
 
 
-
-
-class Celulares {
-    constructor (id, marca, modelo, año, precio, imagen){
-        this.id = id
-        this.marca = marca
-        this.modelo = modelo
-        this.año = año
-        this.precio = precio
-        this.imagen= imagen;
-    }
-}
-
-
-const celular1 = new Celulares (1, "Motorola", "G52 128GB", 2022, 51.999,"assets/Celular1.jpg")
-
-const celular2 = new Celulares (2, "Samsung", "S20 128GB", 2022, 115.599, "assets/Celular2.jpg")
-
-const celular3 = new Celulares (3, "Motorola", "G42 64GB", 2021, 47.999, "assets/celular3.jpg")
-
-const celular4 = new Celulares (4, "Samsung", "A31 64GB", 2020, 37.999, "assets/Celular4.jpg")
-
-const celular5 = new Celulares (5, "TCL","20SE 256GB", 2021, 58.999, "assets/Celular5.jpg")
-
-const celular6 = new Celulares (6, "TCL", "L7+ 64GB", 2020, 34.999, "assets/Celular6.jpg")
-
-
-
-
-
-let mostrador = []
-
 let equiposCarrito = JSON.parse(localStorage.getItem("carrito")) || []
 
 
@@ -57,22 +25,6 @@ let equiposCarrito = JSON.parse(localStorage.getItem("carrito")) || []
  let parrafoCompra = document.getElementById("precioTotal")
  let acumulador
  let divProductos = document.getElementById("productos")
-
-
-
- 
-
-
-if(localStorage.getItem("mostrador")){
-    mostrador = JSON.parse(localStorage.getItem("mostrador"))
-    console.log(mostrador);
-}else{
-    mostrador.push(celular1, celular2, celular3, celular4, celular5, celular6)
-    localStorage.setItem("mostrador", JSON.stringify(mostrador))
-}
-
-
-
 
 
 function nuevoCelular(){
@@ -178,7 +130,7 @@ mostrarCatalogoBtn.addEventListener("click", ()=>{
 loaderCatalogo.setAttribute("style", "display: block;")
 loaderCatalogo.innerHTML = `<div class="d-flex justify-content-center align-content-center">
     <strong> Aguarde mientras se carga nuestro catálogo...</strong>
-    <div class="spinner-border m-5 text-light" style= "widht: 3rem; height: 3rem;"</div>
+    <div class="spinner-border m-8 text-light" style= "widht: 3rem; height: 3rem;"</div>
     </div>`;
 setTimeout(()=>{
     loaderCatalogo.remove()
@@ -284,18 +236,18 @@ function finalizarCompra(){
                 text: `Confirmaste la compra del equipo de tus sueños.`,
                 footer: `<p> Dentro de las próximas 48hrs hábiles tu envio será entregado. Recuerda estar atento a la puerta</p>`
             })
-        mostrador = []
-        localStorage.removeItem('carrito')
-        inventarioCarrito(aCarrito)
         }else{
             swal.fire({
                 title: 'Se canceló tu compra',
                 icon: 'error',
-                text: 'La compra no fue realizada, pero recuerde de vaciar el carrito',
+                text: 'La compra no fue realizada y su carrito fue vaciado. Vuelva a elegir el equipo a comprar',
                 timer: 4000
             })
         }
     })
+    equiposCarrito = []
+    localStorage.removeItem("carrito")
+    inventarioCarrito(equiposCarrito)
 }
 
 
@@ -332,3 +284,4 @@ botonCarrito.addEventListener(`click`, () =>{
 botonFinalizarCompra.addEventListener('click', ()=>{
     finalizarCompra()
 })
+
