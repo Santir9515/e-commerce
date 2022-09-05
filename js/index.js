@@ -1,4 +1,5 @@
 
+// Vegas Fondo
 
 $(document).ready(function(){
     $("body").vegas({
@@ -15,17 +16,18 @@ $(document).ready(function(){
 })
 
 
-
+//Declaración de variables
 let equiposCarrito = JSON.parse(localStorage.getItem("carrito")) || []
+let botonCarrito = document.getElementById("botonCarrito")
+let modalBody = document.getElementById("modalBody")
+let botonFinalizarCompra = document.getElementById("botonFinalizarCompra") 
+let parrafoCompra = document.getElementById("precioTotal")
+let acumulador
+let divProductos = document.getElementById("productos")
 
+//Funciones y eventos
 
- let botonCarrito = document.getElementById("botonCarrito")
- let modalBody = document.getElementById("modalBody")
- let botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
- let parrafoCompra = document.getElementById("precioTotal")
- let acumulador
- let divProductos = document.getElementById("productos")
-
+//Función cargar nuevo celular al catálogo
 
 function nuevoCelular(){
 let marcaCelular = document.getElementById("marcaCelular")
@@ -37,6 +39,8 @@ mostrador.push(celularIngresado)
 localStorage.setItem("mostrador", JSON.stringify(mostrador))
 }
 
+//Evento cargar celular al catálogo
+
 const guardarCelularBtn = document.getElementById("agregarCelularBtn")
 guardarCelularBtn.addEventListener("click", nuevoCelular)
 
@@ -46,9 +50,13 @@ const loaderCatalogo = document.getElementById("loader1")
 loaderCatalogo.addEventListener("click", mostrarCatalogo)
 
 
+//Función para desplegar el catálogo
+
 function mostrarCatalogo(){
     
-    divCatalogo.innerHTML="";
+divCatalogo.innerHTML="";
+
+//Libreria Utilizada
 
 Toastify({
     text: `Catálogo Desplegado`,
@@ -58,9 +66,10 @@ Toastify({
         background: "linear-gradient(to right, #0aa7d6, #000000)",
       }
   }).showToast();
+
+// Creación con innerHTML para que desplegue catálogo
+
 mostrador.forEach((celular)=> {
-
-
     let nuevoProducto = document.createElement("div")
     nuevoProducto.innerHTML = `<article id="${celular.id}" class= "card ">
                                 <h3 class= "marcaCard">${celular.marca}</h3>
@@ -73,19 +82,18 @@ mostrador.forEach((celular)=> {
                             </article>`
     divCatalogo.appendChild(nuevoProducto)
 
+//Evento para agregar los productos al carrito
+
+let aCarrito = document.getElementById(`aCarrito${celular.id}`)
     
+console.log(aCarrito);
 
+aCarrito.addEventListener("click", () => (agregarAlCarrito(celular)))
 
-
-    let aCarrito = document.getElementById(`aCarrito${celular.id}`)
-    console.log(aCarrito);
-
-    aCarrito.addEventListener("click", () => (agregarAlCarrito(celular)))
-
-        })
-    
-    
+    })
     }
+
+//Funcion de agregar al carrito donde aplicamos un condicional para que aquellos equipos que son modelos menores a 2021, con un sweet alert, explicamos que no hay stock del mismo.
 
 function agregarAlCarrito (celular){
     let celularAgregado = equiposCarrito.indexOf(celular)
@@ -117,15 +125,14 @@ function agregarAlCarrito (celular){
             })   
         }
     }
-
-
 }
     
 
+//Cargamos con el Loader para simular la espera de la respuesta a un servidor
+
+
 let mostrarCatalogoBtn = document.getElementById("verCatalogoBtn")
 mostrarCatalogoBtn.addEventListener("click", ()=>{
-  
-//Loader
 
 loaderCatalogo.setAttribute("style", "display: block;")
 loaderCatalogo.innerHTML = `<div class="d-flex justify-content-center align-content-center">
@@ -138,6 +145,8 @@ setTimeout(()=>{
 },2000)
 })
 
+
+//Funcion de ocultar Catálogo con libreria
 
 function ocultarCatalogo (){
     divCatalogo.innerHTML = ""
@@ -155,6 +164,8 @@ let ocultarCatalogoBtn = document.getElementById("ocultarCatalogoBtn")
 ocultarCatalogoBtn.onclick = ocultarCatalogo
 
 
+//Función para cargar en el Storage todo lo que carguemos como nuevo producto
+
  function inventarioCarrito (inventarioStorage){
      modalBody.innerHTML = ""
      inventarioStorage.forEach((aCarrito)=> {
@@ -170,9 +181,9 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
      </div>`
      })
     
-     //Eliminar producto del carrito
-     inventarioStorage.forEach((aCarrito, indice) =>{
-        
+//Función para eliminar producto del carrito con librerias. Aqui utilizamos la desestructuración con Spread
+
+    inventarioStorage.forEach((aCarrito, indice) =>{       
         document.getElementById(`botonRemover${aCarrito.id}`).addEventListener('click', () => {
             Toastify({
                 text: `El equipo ${aCarrito.marca} ${aCarrito.modelo} fue eliminado de su carrito`,
@@ -191,14 +202,11 @@ ocultarCatalogoBtn.onclick = ocultarCatalogo
         })
 
      })
-
-
-     
-
-     valorTotalCompra(...inventarioStorage)
+    valorTotalCompra(...inventarioStorage)
  }
 
 
+//Función con acumulador para poder evaluar el monto total de la compra. Aqui se aplica la desestructuración Spread
 
 function valorTotalCompra(...totalCompra){
     acumulador = 0
@@ -206,12 +214,12 @@ function valorTotalCompra(...totalCompra){
         return acumulador + aCarrito.precio
     },0)
 
-    //Ternario
+//Utilizamos el Ternario, para simplificar en una linea una funcion condicional
 
-    acumulador > 0 ? parrafoCompra.innerHTML = `Usted esta por pagar $ ${acumulador}` : parrafoCompra.innerHTML = "<p> No agrego ningún producto al carrito</p>" 
-    
-    
+    acumulador > 0 ? parrafoCompra.innerHTML = `Usted esta por pagar $ ${acumulador}` : parrafoCompra.innerHTML = "<p> No agrego ningún producto al carrito</p>"     
 }
+
+//Funcion de finalizar compra, donde utilizamos la libreria de sweet Alert
 
 function finalizarCompra(){
     swal.fire({
@@ -250,32 +258,14 @@ function finalizarCompra(){
     inventarioCarrito(equiposCarrito)
 }
 
-
-//DesestructuracionAlias
-
-let [a, c, b, d, e, f] = mostrador
-a = "Motorola"
-b = "Motorola"
-c = "Samsung"
-d = "Samsung"
-e = "TCL"
-f = "TCL"
-console.log(a);
-console.log(b);
-console.log(c);
-console.log(d);
-console.log(e);
-console.log(f);
-
-
-  //Fecha con Luxon
+//Fecha con Luxon
  let DateTime = luxon.DateTime
  const diaLocal = DateTime.now()
  let fechaLocal = (diaLocal.toLocaleString(DateTime.DATE_FULL))
  let mostrarFecha = document.getElementById("fechaLocal")
  mostrarFecha.innerHTML = `<p class= "fechaLocal">Hoy es ${fechaLocal} y nos encanta verte en nuestra Tienda</p>`
 
-//BotonCarrito
+//BotonCarrito y eventos
 
 botonCarrito.addEventListener(`click`, () =>{
     inventarioCarrito(equiposCarrito)
