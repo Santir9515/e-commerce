@@ -85,8 +85,6 @@ mostrador.forEach((celular)=> {
 //Evento para agregar los productos al carrito
 
 let aCarrito = document.getElementById(`aCarrito${celular.id}`)
-    
-console.log(aCarrito);
 
 aCarrito.addEventListener("click", () => (agregarAlCarrito(celular)))
 
@@ -235,7 +233,6 @@ function finalizarCompra(){
         let DateTime = luxon.DateTime
         const diaLocal = DateTime.now()
         let fecha = `Usted ha confirmado la compra del equipo el ${diaLocal.toLocaleString(DateTime.DATETIME_FULL)}`;
-        console.log(fecha);
         if (result.isConfirmed){
             swal.fire({
                 title: 'Todo listo crack',
