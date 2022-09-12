@@ -20,6 +20,5 @@ fetch("./Celulares.json")
     data.forEach ((celular) => {
         let mostradorFetch = new Celulares(celular.id, celular.marca, celular.modelo,celular.año, celular.precio, celular.imagen)
         mostrador.push(mostradorFetch)
-        console.log(mostradorFetch);
     }
 )})
