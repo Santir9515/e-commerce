@@ -1,7 +1,7 @@
 
 // Vegas Fondo
 
-git$(document).ready(function(){
+$(document).ready(function(){
     $("body").vegas({
         delay: 6500,
         slides: [
